@@ -31,11 +31,13 @@ It blends **artistic visual style** with **clean code**, featuring animated UI, 
 ---
 
 ## 🧩 File Structure  
-.
+
+```
 ├── index.html # Main page (everything’s in here)
 ├── background.mp4 # Optional video background
 ├── profile.jpg # Avatar / profile image
 └── /assets # (Recommended) for future images, scripts, or styles
+```
 
 
 ---

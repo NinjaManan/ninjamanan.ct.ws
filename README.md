@@ -53,7 +53,7 @@ Open index.html in your browser — no server setup needed.
 
 (Optional) Replace profile.jpg and background.mp4 with your own assets.
 
-🧭 Future Plans
+## 🧭 Future Plans
 
 Add project showcase section
 
@@ -63,11 +63,11 @@ Light/dark theme toggle
 
 Performance optimization
 
-📬 Contact
+## 📬 Contact
 
 If you want to collaborate or discuss something creative —
 Get in Touch
- or DM me on X
+ or DM me on discord @ninjamanan
 .
 
 © @ninjamanan — Crafted with ♥, pixels, and caffeine.

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>@ninjamanan | 3D Artist & Programmer</title>
+<meta content="An enhanced profile for ninjamanan, 3D Artist and Programmer" name="description"/>
+<meta content="@ninjamanan" name="author"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Smoother gradient */
+            background: linear-gradient(135deg, #10101A 0%, #1A1A2E 100%);
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Entrance Overlay */
+        .entrance-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 20, 0.97); /* Slightly more opaque */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer;
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smoother transition */
+        }
+
+        .entrance-text {
+            font-size: 2rem; /* Responsive font size */
+            font-weight: 700;
+            color: #E0E0FF; /* Softer white */
+            text-shadow: 0 0 25px rgba(200, 200, 255, 0.6);
+            animation: pulse-subtle 2.5s infinite alternate; /* More subtle pulse */
+        }
+
+        @keyframes pulse-subtle {
+            0% { opacity: 0.7; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* Sparkle Effect */
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFF; /* Bright white for contrast */
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle-anim 1.2s ease-out forwards;
+            box-shadow: 0 0 8px #FFF, 0 0 12px #FFF, 0 0 16px #A0A0FF; /* Enhanced glow */
+            opacity: 0; /* Start invisible */
+        }
+
+        @keyframes sparkle-anim {
+            0% {
+                opacity: 0;
+                transform: scale(0) translateY(0px) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) translateY(-15px) rotate(90deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-30px) rotate(180deg);
+            }
+        }
+
+        /* Custom scrollbar for a more polished look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1A2E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A4A6A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6A6A8A;
+        }
+
+        /* Background Video Styling */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1; /* Reduced opacity for better text readability */
+            z-index: -2;
+            filter: blur(2px); /* Subtle blur */
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(16, 16, 26, 0.5); /* Darker overlay */
+            z-index: -1;
+        }
+
+        /* Card hover effect */
+        .hover-lift {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Skill bar animation */
+        .skill-bar-fill {
+            transition: width 1.5s ease-in-out;
+        }
+    
+        /* --- LIQUID GLASS PANEL STYLE (Maximized Liquid & Beveled Look) --- */
+        .liquid-glass-panel {
+            position: relative;
+            /* Almost fully transparent base background, relying on backdrop-filter for effect */
+            background: rgba(255, 255, 255, 0.01); 
+            
+            /* Crucial for liquid: minimal blur, increased saturation and brightness for 'clean' glass */
+            backdrop-filter: blur(1px) saturate(250%) brightness(120%); 
+            -webkit-backdrop-filter: blur(1px) saturate(250%) brightness(120%);
+            
+            border: 0.5px solid rgba(255, 255, 255, 0.08); /* Very thin, subtle border for the edge */
+            border-radius: 35px; /* Larger border-radius for smoother, 'melted' edges */
+            
+            box-shadow: 
+                /* Outer soft shadow for significant depth */
+                0 20px 90px rgba(0, 0, 0, 0.35), 
+                /* Stronger inner top-left light bevel */
+                inset 5px 5px 12px rgba(255, 255, 255, 0.1), 
+                /* Stronger inner bottom-right dark bevel */
+                inset -5px -5px 12px rgba(0, 0, 0, 0.25),
+                /* Very subtle internal glow for light passing through */
+                inset 0 0 0 1px rgba(255, 255, 255, 0.01); 
+            
+            overflow: hidden; /* Crucial for containing pseudo-elements */
+            transform-style: preserve-3d; /* For realistic 3D transforms */
+            perspective: 1000px;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); /* Smoother, more liquid-like transitions */
+        }
+
+        /* More dynamic reflection/sheen for liquid feel */
+        .liquid-glass-panel::before {
+            content: '';
+            position: absolute;
+            top: -100%; /* Start even higher for full sweep */
+            left: -100%; /* Start even further left */
+            width: 400%; /* Extremely large area for reflection */
+            height: 400%; /* Extremely large area for reflection */
+            background: radial-gradient(circle at 60% 60%, 
+                                        rgba(255, 255, 255, 0.4) 0%, /* Brighter peak */
+                                        rgba(255, 255, 255, 0.1) 20%, /* More gradual fade */
+                                        rgba(255, 255, 255, 0) 50%); /* Faster fade to transparent */
+            opacity: 0.95; /* Almost fully opaque at peak */
+            transform: rotate(70deg); /* Angle the reflection dynamically */
+            pointer-events: none;
+            z-index: 1;
+            /* More expressive transition for liquid movement */
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease; 
+        }
+        
+        /* Inner subtle light/dark contrast, simulating light passing through different thicknesses */
+        /* This layer also helps create the illusion of subtle "refraction" through color shifts */
+        .liquid-glass-panel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 35px; /* Match panel's border-radius */
+            box-shadow: 
+                /* Very subtle internal glow, almost like light dispersion */
+                inset 0 0 40px rgba(255, 255, 255, 0.01), 
+                /* Subtle internal shadow for depth, hinting at thickness */
+                inset 0 0 80px rgba(0, 0, 0, 0.05); 
+            
+            /* Introduce subtle color shifts for "refraction" hint */
+            background: linear-gradient(
+                45deg, 
+                rgba(100, 150, 255, 0.02) 0%, /* Hint of blue shift */
+                rgba(255, 100, 200, 0.01) 100% /* Hint of pink shift */
+            );
+            mix-blend-mode: overlay; /* Helps blend colors with underlying content */
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Hover effect for a more interactive 3D feel */
+        .liquid-glass-panel:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(3deg) rotateY(-1deg); /* More pronounced lift, scale, and subtle 3D tilt */
+            box-shadow: 
+                0 30px 120px rgba(0, 0, 0, 0.4), /* Even stronger outer shadow on hover */
+                inset 5px 5px 15px rgba(255, 255, 255, 0.15), 
+                inset -5px -5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .liquid-glass-panel:hover::before {
+            transform: rotate(90deg) scale(1.5); /* More dramatic shift and scale on hover */
+            opacity: 1; /* Fully opaque at peak */
+            filter: brightness(1.2); /* Enhance brightness of reflection */
+        }
+        /* The old .glass-panel is no longer used, but keeping its definition to avoid errors if it was intended elsewhere */
+        .glass-panel { 
+            display: none; 
+        }
+</style>
+</head>
+<body class="text-gray-200 antialiased">
+<video autoplay="" class="background-video" loop="" muted="" playsinline="">
+<source src="background.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+    </video>
+<div class="background-overlay"></div>
+<div class="entrance-overlay" id="entranceOverlay">
+<div class="entrance-text">Ideas, Engineered ...</div>
+</div>
+<div class="container mx-auto px-4 py-8 md:py-16 opacity-0 transition-opacity duration-1000 ease-in-out" id="mainContent">
+<div class="profile-card liquid-glass-panel p-6 md:p-10 shadow-2xl max-w-2xl mx-auto text-center hover-lift relative overflow-hidden">
+<div class="mb-6">
+<img alt="Profile Avatar" class="w-32 h-32 md:w-36 md:h-36 mx-auto rounded-full border-4 border-indigo-500/70 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-indigo-400/50" onerror="this.src='https://placehold.co/150x150/333333/ffffff?text=NM'" src="profile.jpg"/>
+</div>
+<h1 class="text-4xl md:text-5xl font-extrabold mb-2">
+<span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+      ninjamanan
+    </span>
+</h1>
+<p class="text-lg md:text-xl text-indigo-300/90 mb-6 font-medium">
+    3D Artist & Programmer with a knack for code, Blender & Unreal Engine.
+  </p>
+<p class="text-gray-400 mb-8 leading-relaxed max-w-md mx-auto">
+    Passionate about creating immersive 3D worlds and elegant code. Exploring new technologies in both digital art and development. Always learning, always creating.
+  </p>
+<div class="flex justify-center space-x-4 mb-10">
+<a class="social-icon group" href="https://youtube.com/@manan3655" target="_blank" title="YouTube">
+<svg class="w-7 h-7 text-gray-400 group-hover:text-red-500 transition-colors duration-300" fill="currentColor" viewbox="1.99 5 20.01 14.01"><path d="M21.593 7.203a2.506 2.506 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765c1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6l5.207 3.005l-5.212 2.995z"></path></svg>
+</a>
+<a class="social-icon group" href="https://open.spotify.com/user/31ojlmwi2i3c6qclp6uuzmsj7bum" target="_blank" title="Spotify">
+<svg class="w-7 h-7 text-gray-400 group-hover:text-green-500 transition-colors duration-300" fill="currentColor" viewbox="2.02 2.02 19.98 19.98"><path d="M12.01 2.019c-5.495 0-9.991 4.496-9.991 9.991c0 5.494 4.496 9.99 9.991 9.99c5.494 0 9.99-4.496 9.99-9.99c0-5.495-4.446-9.991-9.99-9.991zm4.595 14.436c-.199.299-.549.4-.85.201c-2.349-1.45-5.296-1.75-8.793-.951c-.348.102-.648-.148-.748-.449c-.101-.35.149-.648.45-.749c3.795-.85 7.093-.499 9.69 1.1c.35.149.4.548.251.848zm1.2-2.747c-.251.349-.7.499-1.051.249c-2.697-1.646-6.792-2.148-9.939-1.148c-.398.101-.85-.1-.949-.498c-.101-.402.1-.852.499-.952c3.646-1.098 8.143-.548 11.239 1.351c.3.149.45.648.201.998zm.099-2.799c-3.197-1.897-8.542-2.097-11.59-1.146a.938.938 0 0 1-1.148-.6a.937.937 0 0 1 .599-1.151c3.547-1.049 9.392-.85 13.089 1.351c.449.249.599.849.349 1.298c-.25.35-.849.498-1.299.248z"></path></svg>
+</a>
+<a class="social-icon group" href="https://x.com/NinjaManan" target="_blank" title="Twitter/X">
+<svg class="w-7 h-7 text-gray-400 group-hover:text-blue-400 transition-colors duration-300" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+<section class="my-12 md:my-20" id="skills">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12 text-indigo-300">My Digital Arsenal (Skills)</h2>
+<div class="max-w-3xl mx-auto p-6 md:p-8 shadow-lg liquid-glass-panel">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+<div>
+<h4 class="text-lg font-semibold mb-1 text-purple-300">Blender</h4>
+<div class="w-full bg-gray-700 rounded-full h-2.5">
+<div class="skill-bar-fill bg-gradient-to-r from-orange-500 to-red-500 h-2.5 rounded-full" data-skill-level="90%" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-1 text-purple-300">Unreal Engine</h4>
+<div class="w-full bg-gray-700 rounded-full h-2.5">
+<div class="skill-bar-fill bg-gradient-to-r from-gray-400 to-blue-500 h-2.5 rounded-full" data-skill-level="80%" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-1 text-purple-300">JavaScript</h4>
+<div class="w-full bg-gray-700 rounded-full h-2.5">
+<div class="skill-bar-fill bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full" data-skill-level="85%" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-1 text-purple-300">Python</h4>
+<div class="w-full bg-gray-700 rounded-full h-2.5">
+<div class="skill-bar-fill bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full" data-skill-level="75%" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-1 text-purple-300">React / Next.js</h4>
+<div class="w-full bg-gray-700 rounded-full h-2.5">
+<div class="skill-bar-fill bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full" data-skill-level="70%" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-1 text-purple-300">Node.js</h4>
+<div class="w-full bg-gray-700 rounded-full h-2.5">
+<div class="skill-bar-fill bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full" data-skill-level="65%" style="width: 0%"></div>
+</div>
+</div>
+</div>
+</div>
+<div id="contactModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300">
+    <div class="liquid-glass-panel p-8 rounded-lg shadow-xl w-full max-w-md mx-4 transform scale-95 transition-all duration-300">
+        <h3 class="text-2xl font-bold text-indigo-300 mb-6 text-center">Get in Touch</h3>
+        <form id="contactForm" action="https://formspree.io/f/mrblqyal" method="POST">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
+                <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-gray-700/50 border border-gray-600 focus:outline-none focus:border-indigo-500 text-white" required>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
+                <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-gray-700/50 border border-gray-600 focus:outline-none focus:border-indigo-500 text-white" required>
+            </div>
+            <div class="mb-6">
+                <label for="message" class="block text-gray-300 text-sm font-semibold mb-2">Message</label>
+                <textarea id="message" name="message" rows="5" class="w-full p-3 rounded-md bg-gray-700/50 border border-gray-600 focus:outline-none focus:border-indigo-500 text-white" required></textarea>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="closeModal" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200">Cancel</button>
+                <button type="submit" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-200">Send Message</button>
+            </div>
+        </form>
+    </div>
+</div>
+</section>
+<section class="text-center my-12 md:my-20" id="contact">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 text-indigo-300">Want to Collaborate?</h2>
+<p class="text-gray-400 mb-8 max-w-lg mx-auto">
+                I'm always open to discussing new projects, creative ideas, or opportunities to merge art and code.
+            </p>
+<button class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Get in Touch
+            </button>
+</section>
+<footer class="text-center py-8 mt-10 border-t border-gray-700/50">
+<p class="text-gray-500">© <span id="currentYear"></span> @ninjamanan. All rights reserved. </p>
+<p class="text-xs text-gray-600 mt-1">Crafted with <span class="text-red-500">♥</span> and a blend of pixels & code.</p>
+</footer>
+
+<script>
+        // Entrance Overlay
+        const entranceOverlay = document.getElementById('entranceOverlay');
+        const mainContent = document.getElementById('mainContent');
+        
+        entranceOverlay.addEventListener('click', function() {
+            entranceOverlay.style.opacity = '0';
+            setTimeout(() => {
+                entranceOverlay.style.display = 'none';
+                mainContent.style.opacity = '1';
+                animateSkillBars(); // Animate skill bars after content is shown
+            }, 700); // Match CSS transition duration
+        });
+
+        // Sparkle effect on mouse move
+        document.addEventListener('mousemove', function(e) {
+            // Create sparkles less frequently for a cleaner look
+            if (Math.random() > 0.97) { 
+                createSparkle(e.clientX + window.scrollX, e.clientY + window.scrollY);
+            }
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            // Offset so sparkle appears near cursor, not directly under it
+            sparkle.style.left = (x - 5) + 'px'; 
+            sparkle.style.top = (y - 5) + 'px';
+            
+            // Randomize sparkle color slightly for more visual interest
+            const colors = ['#FFFFFF', '#F0F0FF', '#E0E0FF'];
+            sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            sparkle.style.boxShadow = `0 0 8px ${sparkle.style.background}, 0 0 12px ${sparkle.style.background}, 0 0 16px #A0A0FF`;
+
+
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1200); // Match animation duration
+        }
+        
+        // Random background sparkles (less frequent)
+        setInterval(() => {
+            if (document.getElementById('entranceOverlay').style.display === 'none') { // Only if main content is visible
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                createSparkle(x + window.scrollX, y + window.scrollY);
+            }
+        }, 3000); // Slower interval
+
+        // Update current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Animate skill bars when they become visible
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-bar-fill');
+            skillBars.forEach(bar => {
+                const level = bar.getAttribute('data-skill-level');
+                // Timeout to ensure the transition is visible after the main content fades in
+                setTimeout(() => {
+                    bar.style.width = level;
+                }, 200); 
+            });
+        }
+
+        // Fallback for video if it fails to load
+        const videoElement = document.querySelector('.background-video');
+        if (videoElement) {
+            videoElement.addEventListener('error', function() {
+                // If video fails, you could set a static background image or a simpler gradient
+                console.warn("Background video failed to load. Applying fallback background.");
+                document.body.style.backgroundImage = 'linear-gradient(135deg, #10101A 0%, #1A1A2E 100%)';
+                // Hide video and its overlay if it fails
+                videoElement.style.display = 'none';
+                const videoOverlay = document.querySelector('.background-overlay');
+                if (videoOverlay) videoOverlay.style.display = 'none';
+            });
+        }
+
+        // Get modal elements
+        const contactModal = document.getElementById('contactModal');
+        const getInTouchButton = document.querySelector('#contact button'); // Select the button within the contact section
+        const closeModalButton = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+
+        // Function to open the modal
+        function openContactModal() {
+            contactModal.classList.remove('opacity-0', 'invisible');
+            contactModal.classList.add('opacity-100', 'visible');
+            contactModal.querySelector('.liquid-glass-panel').classList.remove('scale-95');
+            contactModal.querySelector('.liquid-glass-panel').classList.add('scale-100');
+        }
+
+        // Function to close the modal
+        function closeContactModal() {
+            contactModal.classList.remove('opacity-100', 'visible');
+            contactModal.classList.add('opacity-0', 'invisible');
+            contactModal.querySelector('.liquid-glass-panel').classList.remove('scale-100');
+            contactModal.querySelector('.liquid-glass-panel').classList.add('scale-95');
+        }
+
+        // Event listener for "Get in Touch" button
+        getInTouchButton.addEventListener('click', openContactModal);
+
+        // Event listener for "Cancel" button inside the modal
+        closeModalButton.addEventListener('click', closeContactModal);
+
+        // Close modal if user clicks outside the form
+        contactModal.addEventListener('click', function(e) {
+            if (e.target === contactModal) {
+                closeContactModal();
+            }
+        });
+
+        // The corrected form submission handler
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission (page reload)
+
+            const formData = new FormData(contactForm);
+
+            // Send the form data to Formspree using the fetch API
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Submission was successful
+                    alert('Thank you for your message! We will get back to you soon.');
+                    closeContactModal();
+                    contactForm.reset();
+                } else {
+                    // Submission failed
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data.errors.map(error => error.message).join(", "));
+                        } else {
+                            alert('Oops! There was a problem submitting your form. Please try again.');
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                // Network or other unexpected error
+                alert('Oops! There was a problem submitting your form. Please check your network connection and try again.');
+            });
+        });
+
+    </script>
+</body>
+</html>

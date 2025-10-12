@@ -31,3 +31,43 @@ It blends **artistic visual style** with **clean code**, featuring animated UI, 
 ---
 
 ## 🧩 File Structure  
+├── index.html # Main page (everything’s in here)
+├── background.mp4 # Optional video background
+├── profile.jpg # Avatar / profile image
+└── /assets # (Recommended) for future images, scripts, or styles
+
+
+---
+
+## ⚙️ Setup  
+1. Clone the repo  
+   ```bash
+   git clone https://github.com/ninjamanan/ninjamanan.github.io.git
+   cd ninjamanan.github.io
+
+
+Open index.html in your browser — no server setup needed.
+
+(Optional) Replace profile.jpg and background.mp4 with your own assets.
+
+🧭 Future Plans
+
+Add project showcase section
+
+Integrate blog/articles system
+
+Light/dark theme toggle
+
+Performance optimization
+
+📬 Contact
+
+If you want to collaborate or discuss something creative —
+Get in Touch
+ or DM me on X
+.
+
+© @ninjamanan — Crafted with ♥, pixels, and caffeine.
+
+
+---

@@ -7,12 +7,12 @@ It blends **artistic visual style** with **clean code**, featuring animated UI, 
 
 ---
 
-## 🚀 Live Demo  
-👉 **[Visit Website](https://ninjamanan.github.io)**  
+##  Live Demo  
+-- **[Visit Website](https://ninjamanan.github.io)**  
 
 ---
 
-## 🧠 Tech Stack  
+##  Tech Stack  
 - **Frontend:** HTML5, Tailwind CSS, JavaScript  
 - **Effects:** Custom animations, blur overlays, sparkle trails  
 - **Backend/Form Handling:** Formspree API for contact submissions  
@@ -20,17 +20,17 @@ It blends **artistic visual style** with **clean code**, featuring animated UI, 
 
 ---
 
-## 💡 Features  
-✅ Animated entrance overlay  
-✅ “Liquid glass” cards with subtle reflection effects  
-✅ Responsive and mobile-friendly layout  
-✅ Sparkle and hover interaction system  
-✅ Contact modal powered by Formspree  
-✅ Background video with graceful fallback  
+##  Features  
+- Animated entrance overlay  
+- “Liquid glass” cards with subtle reflection effects  
+- Responsive and mobile-friendly layout  
+- Sparkle and hover interaction system  
+- Contact modal powered by Formspree  
+- Background video with graceful fallback  
 
 ---
 
-## 🧩 File Structure  
+##  File Structure  
 
 ```
 ├── index.html # Main page (everything’s in here)
@@ -42,7 +42,7 @@ It blends **artistic visual style** with **clean code**, featuring animated UI, 
 
 ---
 
-## ⚙️ Setup  
+##  Setup  
 1. Clone the repo  
    ```bash
    git clone https://github.com/ninjamanan/ninjamanan.github.io.git
@@ -53,7 +53,7 @@ Open index.html in your browser — no server setup needed.
 
 (Optional) Replace profile.jpg and background.mp4 with your own assets.
 
-## 🧭 Future Plans
+##  Future Plans
 
 Add project showcase section
 
@@ -63,14 +63,14 @@ Light/dark theme toggle
 
 Performance optimization
 
-## 📬 Contact
+##  Contact
 
 If you want to collaborate or discuss something creative —
 Get in Touch
  or DM me on discord @ninjamanan
 .
 
-© @ninjamanan — Crafted with ♥, pixels, and caffeine.
+© @ninjamanan 
 
 
 ---

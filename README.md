@@ -1,10 +1,5 @@
 # THE SITE
 
-### 3D Artist • Programmer • Blender & Unreal Enthusiast  
-
-A personal website built to showcase my work in **3D art, design, and programming**.  
-It blends **artistic visual style** with **clean code**, featuring animated UI, liquid-glass effects, and a responsive layout powered by **Tailwind CSS**.
-
 ---
 
 ##  Live Demo  

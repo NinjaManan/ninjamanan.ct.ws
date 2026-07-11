@@ -3,7 +3,7 @@
 ---
 
 ##  Live Demo  
--- **[Visit Website](https://ninjamanan.github.io)**  
+-- **[Visit Website](https://ninjamanan.site.je)**  
 
 ---
 

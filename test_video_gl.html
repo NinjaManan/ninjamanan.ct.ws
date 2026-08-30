@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test</title></head>
+<body>
+<video id='vid' src='background.mp4' muted autoplay playsinline></video>
+<canvas id='c' width='100' height='100'></canvas>
+<script>
+window.testLog = [];
+const vid = document.getElementById('vid');
+const c = document.getElementById('c');
+const gl = c.getContext('webgl');
+
+function testTex() {
+  try {
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vid);
+    window.testLog.push('TEX_SUCCESS');
+  } catch (e) {
+    window.testLog.push('TEX_ERROR: ' + e.name + ': ' + e.message);
+  }
+}
+
+vid.addEventListener('playing', () => {
+  window.testLog.push('VID_PLAYING');
+  testTex();
+});
+vid.addEventListener('loadeddata', () => {
+  window.testLog.push('VID_LOADED');
+  testTex();
+});
+setTimeout(() => {
+  window.testLog.push('READY_STATE_' + vid.readyState);
+  testTex();
+  console.log('RESULT_OUTPUT:' + JSON.stringify(window.testLog));
+}, 1500);
+</script>
+</body>
+</html>
